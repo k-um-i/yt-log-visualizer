@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>YouTube Listening Overview</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>YouTube Listening Overview</h1>
+
+    <section>
+        <h2>Time Spent Per Channel</h2>
+        <canvas id="channelChart" width="600" height="400"></canvas>
+    </section>
+
+    <section>
+        <h2>Livestreams vs Videos</h2>
+        <canvas id="typeChart" width="400" height="400"></canvas>
+    </section>
+
+    <section>
+        <h2>All Logged Videos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Channel</th>
+                    <th>Duration</th>
+                    <th>Type</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for video in video_entries %}
+                <tr>
+                    <td>{{ video.title }}</td>
+                    <td>{{ video.channel }}</td>
+                    <td>{{ video.duration }}</td>
+                    <td>{{ "Livestream" if video.is_live else "Video" }}</td>
+                    <td><a href="{{ video.url }}" target="_blank">Watch</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <script>
+        // Channel Time Bar Chart
+        const channelCtx = document.getElementById('channelChart').getContext('2d');
+        new Chart(channelCtx, {
+            type: 'bar',
+            data: {
+                labels: {{ channel_time_minutes | map(attribute=0) | list | tojson }},
+                datasets: [{
+                    label: 'Time Spent (minutes)',
+                    data: {{ channel_time_minutes | map(attribute=1) | list | tojson }},
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                plugins: {
+                    legend: { display: false },
+                    title: { display: true, text: 'Listening Time per Channel' }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Minutes'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Livestream vs Video Pie Chart
+        const typeCtx = document.getElementById('typeChart').getContext('2d');
+        new Chart(typeCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Livestream', 'Video'],
+                datasets: [{
+                    data: [
+                      {{ (livestream_time_minutes) }},
+                      {{ (video_time_minutes) }}
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(75, 192, 192, 0.6)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: { display: true, text: 'Livestream vs Video Time' }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
