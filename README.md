@@ -1,5 +1,5 @@
 # yt-log-visualizer
-Python script for generating an overview.html file that provides an overview of Youtube data logged with the アリス -discord bot.
+Python script for generating an overview.html file that provides an overview of Youtube data logged in a .csv file.
 
 ## Usage Instructions
 1. Clone the repo
@@ -10,7 +10,7 @@ git clone https://github.com/k-um-i/yt-log-visualizer.git
 ```
 pip install -r requirements.txt
 ```
-3. Inside the main.py file, change the string inside 'parse_log()' to point to your exported .csv file.
+3. Inside the main.py file, change the string inside 'parse_log()' to point to your .csv file.
 4. Run the script
 ```
 python main.py
@@ -20,6 +20,11 @@ python main.py
 1. The script may take a while to run depending on how many Youtube videos you have logged, since it requests each videos metadata.
 2. Only log entries that are 'Listening Time' and have a Youtube link inside the 'Comment' column will be parsed.
 3. The visuals and overall execution is still horrendous, I'll probably update it at somepoint.
+
+### CSV File format
+Required Columns: [Media Type, Comment] \
+Media Type value must be "Listening Time". \
+Comment value must be a Youtube link.
 
 ## Examples
 ![image](https://github.com/user-attachments/assets/7eef8eff-689f-4a4f-a86c-6fd11ddf75bc)
