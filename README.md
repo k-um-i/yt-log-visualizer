@@ -22,10 +22,11 @@ python main.py
 3. The visuals and overall execution is still horrendous, I'll probably update it at somepoint.
 
 ### CSV File format
-Required Columns: [Media Type, Comment] \
+Required Columns: [Media Type, Comment, Log Date] \
 Media Type value must be "Listening Time". \
-Comment value must be a Youtube link.
+Comment value must be a Youtube link. \
+Log Date format: 2025-05-05 19:39:57
 
 ## Examples
-![image](https://github.com/user-attachments/assets/7eef8eff-689f-4a4f-a86c-6fd11ddf75bc)
+![image](https://github.com/user-attachments/assets/68054e91-5fed-4585-bae5-a4690ac8df59)
 ![image](https://github.com/user-attachments/assets/d43f8e57-1e0e-4782-b667-5c2a4231fba9)
