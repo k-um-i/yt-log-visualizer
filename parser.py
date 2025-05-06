@@ -17,6 +17,8 @@ def parse_log(csv_path):
     video_entries = []
     seen_urls = set()
     time_by_date = defaultdict(lambda: {"live": 0.0, "video": 0.0})
+    start_date = "2999-01-01"
+    end_date = ""
 
     with open(csv_path, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
@@ -33,6 +35,10 @@ def parse_log(csv_path):
             try:
                 log_datetime = datetime.strptime(row["Log Date"], "%Y-%m-%d %H:%M:%S")
                 log_date_str = log_datetime.date().isoformat()
+                if log_date_str < start_date:
+                    start_date = log_date_str
+                elif log_date_str > end_date:
+                    end_date = log_date_str
             except ValueError:
                 print(f"[WARN] Invalid date format: {row['Log Date']}")
 
@@ -85,6 +91,7 @@ def parse_log(csv_path):
         "total_stream_time": livestream_time,
         "top_channels": top_channels,
     }
+    log_amount = len(video_entries)
 
     return {
         "channel_time_minutes": channel_time_minutes,
@@ -93,4 +100,7 @@ def parse_log(csv_path):
         "video_entries": video_entries,
         "time_by_date": time_by_date_sorted,
         "summary": summary,
+        "start_date": start_date,
+        "end_date": end_date,
+        "log_amount": log_amount,
     }
