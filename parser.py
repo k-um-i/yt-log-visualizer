@@ -77,10 +77,20 @@ def parse_log(csv_path):
     )
     time_by_date_sorted = sorted(time_by_date.items(), key=lambda x: x[0])
 
+    total_time = video_time + livestream_time
+    top_channels = channel_time_minutes[:10]
+    summary = {
+        "total_time": total_time,
+        "total_video_time": video_time,
+        "total_stream_time": livestream_time,
+        "top_channels": top_channels,
+    }
+
     return {
         "channel_time_minutes": channel_time_minutes,
         "livestream_time_minutes": livestream_time,
         "video_time_minutes": video_time,
         "video_entries": video_entries,
         "time_by_date": time_by_date_sorted,
+        "summary": summary,
     }

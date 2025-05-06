@@ -10,10 +10,29 @@
     <h1>YouTube Listening Overview</h1>
 
     <div class="chart-row">
-      <div class="bar-box">
-        <h2>Time Spent by Channel</h2>
-        <canvas id="channelChart"></canvas>
+      <div class="summary">
+        <div class="summary-box">
+          <h3>Total Time Logged</h3>
+          <p>{{ summary.total_time }} minutes</p>
+        </div>
+        <div class="summary-box">
+          <h3>Time on Videos</h3>
+          <p>{{ summary.total_video_time }} minutes</p>
+        </div>
+        <div class="summary-box">
+          <h3>Time on Livestreams</h3>
+          <p>{{ summary.total_stream_time }} minutes</p>
+        </div>
+        <div class="summary-box" style="flex: 1 1 100%;">
+          <h3>Top Channels</h3>
+          <ul style="list-style-type: none; padding-left: 0;">
+            {% for channel, minutes in summary.top_channels %}
+              <li><strong>{{ channel }}</strong>: {{ minutes }} min</li>
+            {% endfor %}
+          </ul>
+        </div>
       </div>
+
       <div class="pie-box">
         <h2>Livestream vs Video</h2>
         <canvas id="typeChart"></canvas>
@@ -21,6 +40,10 @@
       <div class="date-box">
         <h2>Time Spent Over Time</h2>
         <canvas id="timeChart"></canvas>
+      </div>
+      <div class="bar-box">
+        <h2>Time Spent by Channel</h2>
+        <canvas id="channelChart"></canvas>
       </div>
     </div>
 
