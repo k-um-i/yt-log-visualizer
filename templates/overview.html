@@ -9,13 +9,15 @@
 <body>
     <h1>YouTube Listening Overview</h1>
 
-    <div class="chart-box">
-      <h2>Time Spent by Channel</h2>
-      <canvas id="channelChart"></canvas>
-    </div>
-    <div class="chart-box">
-      <h2>Livestream vs Video</h2>
-      <canvas id="typeChart"></canvas>
+    <div class="chart-row">
+      <div class="bar-box">
+        <h2>Time Spent by Channel</h2>
+        <canvas id="channelChart"></canvas>
+      </div>
+      <div class="pie-box">
+        <h2>Livestream vs Video</h2>
+        <canvas id="typeChart"></canvas>
+      </div>
     </div>
 
     <section>
@@ -45,6 +47,8 @@
     </section>
 
     <script>
+        Chart.defaults.color = '#f2f2f2'
+
         // Channel Time Bar Chart
         const channelCtx = document.getElementById('channelChart').getContext('2d');
         new Chart(channelCtx, {
@@ -89,10 +93,11 @@
         // Livestream vs Video Pie Chart
         const typeCtx = document.getElementById('typeChart').getContext('2d');
         new Chart(typeCtx, {
-            type: 'pie',
+            type: 'doughnut',
             data: {
                 labels: ['Livestream', 'Video'],
                 datasets: [{
+                    label: 'Minutes Watched',
                     data: [
                       {{ (livestream_time_minutes) }},
                       {{ (video_time_minutes) }}

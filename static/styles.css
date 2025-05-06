@@ -59,7 +59,7 @@ tr:hover {
 }
 
 a {
-  color: var(--color1);
+  color: #f95959;
   text-decoration: none;
 }
 
@@ -67,12 +67,17 @@ a:hover {
   text-decoration: underline;
 }
 
-.chart-box {
-  flex: 1 1 45%;
-  min-width: 300px;
-  background-color: var(--color4);
-  border: 1px solid var(--color1);
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+.pie-box {
+  max-width: 30%;
+}
+
+.bar-box {
+  width: 100%;
+}
+
+.chart-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
 }
