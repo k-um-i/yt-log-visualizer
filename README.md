@@ -10,10 +10,9 @@ git clone https://github.com/k-um-i/yt-log-visualizer.git
 ```
 pip install -r requirements.txt
 ```
-3. Inside the main.py file, change the string inside 'parse_log()' to point to your .csv file.
-4. Run the script
+3. Run the script with your .csv file path as the argument
 ```
-python main.py
+python main.py <.csv filepath>
 ```
 
 ### Things to note
