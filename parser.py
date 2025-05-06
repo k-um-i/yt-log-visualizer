@@ -15,7 +15,6 @@ def parse_log(csv_path):
     livestream_time = 0.0
     video_time = 0.0
     video_entries = []
-    seen_urls = set()
     time_by_date = defaultdict(lambda: {"live": 0.0, "video": 0.0})
     start_date = "2999-01-01"
     end_date = ""
@@ -27,9 +26,8 @@ def parse_log(csv_path):
                 continue
 
             url = extract_youtube_url(row["Comment"])
-            if not url or url in seen_urls:
+            if not url:
                 continue
-            seen_urls.add(url)
 
             log_date_str = "Invalid date."
             try:
