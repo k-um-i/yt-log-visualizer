@@ -35,4 +35,5 @@ Log Date format: 2025-05-05 19:39:57
 
 ## Examples
 ![image](https://github.com/user-attachments/assets/68054e91-5fed-4585-bae5-a4690ac8df59)
-![image](https://github.com/user-attachments/assets/d43f8e57-1e0e-4782-b667-5c2a4231fba9)
+![image](https://github.com/user-attachments/assets/58adc059-4a0d-4dd2-ab06-0113a208e981)
+
