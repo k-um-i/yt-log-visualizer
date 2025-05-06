@@ -1,0 +1,78 @@
+:root {
+  --color4: #222831;
+  --color3: #393e46;
+  --color2: #f96d00;
+  --color1: #f2f2f2;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--color4);
+  margin: 0;
+  padding: 2rem;
+  color: var(--color1);
+}
+
+h1,
+h2 {
+  color: var(--color1);
+  border-bottom: 2px solid var(--color2);
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+canvas {
+  margin: 2rem 0;
+  max-width: 100%;
+  background-color: var(--color4);
+  border: 1px solid var(--color1);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  background-color: var(--color4);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+th,
+td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color2);
+}
+
+th {
+  background-color: var(--color4);
+  font-weight: 600;
+  color: var(--color2);
+}
+
+tr:hover {
+  background-color: var(--color3);
+}
+
+a {
+  color: var(--color1);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.chart-box {
+  flex: 1 1 45%;
+  min-width: 300px;
+  background-color: var(--color4);
+  border: 1px solid var(--color1);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}

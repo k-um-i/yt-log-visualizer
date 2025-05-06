@@ -3,21 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>YouTube Listening Overview</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="static/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <h1>YouTube Listening Overview</h1>
 
-    <section>
-        <h2>Time Spent Per Channel</h2>
-        <canvas id="channelChart" width="600" height="400"></canvas>
-    </section>
-
-    <section>
-        <h2>Livestreams vs Videos</h2>
-        <canvas id="typeChart" width="400" height="400"></canvas>
-    </section>
+    <div class="chart-box">
+      <h2>Time Spent by Channel</h2>
+      <canvas id="channelChart"></canvas>
+    </div>
+    <div class="chart-box">
+      <h2>Livestream vs Video</h2>
+      <canvas id="typeChart"></canvas>
+    </div>
 
     <section>
         <h2>All Logged Videos</h2>
@@ -53,7 +52,7 @@
             data: {
                 labels: {{ channel_time_minutes | map(attribute=0) | list | tojson }},
                 datasets: [{
-                    label: 'Time Spent (minutes)',
+                    label: 'Minutes Watched',
                     data: {{ channel_time_minutes | map(attribute=1) | list | tojson }},
                     backgroundColor: 'rgba(54, 162, 235, 0.6)'
                 }]
@@ -61,6 +60,12 @@
             options: {
                 indexAxis: 'y',
                 responsive: true,
+                elements: {
+                  bar: {
+                    borderWidth: 2,
+                    barThickness: 20,
+                  }
+                },
                 plugins: {
                     legend: { display: false },
                     title: { display: true, text: 'Listening Time per Channel' }
@@ -69,8 +74,13 @@
                     x: {
                         title: {
                             display: true,
-                            text: 'Minutes'
+                            text: 'Minutes Watched'
                         }
+                    },
+                    y: {
+                      ticks: {
+                        autoSkip: false
+                      }
                     }
                 }
             }
