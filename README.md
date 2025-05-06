@@ -34,6 +34,7 @@ Log Date format: 2025-05-05 19:39:57
 - Filters/Searching (e.g. showing only data for specified channel)
 
 ## Examples
+![image](https://github.com/user-attachments/assets/0828aaad-e7ad-413c-80ee-c099ecd7b9ee)
 ![image](https://github.com/user-attachments/assets/68054e91-5fed-4585-bae5-a4690ac8df59)
 ![image](https://github.com/user-attachments/assets/58adc059-4a0d-4dd2-ab06-0113a208e981)
 
