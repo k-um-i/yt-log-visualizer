@@ -2,6 +2,7 @@ import csv
 import re
 from pytubefix import YouTube
 from collections import defaultdict
+from datetime import datetime
 
 
 def extract_youtube_url(comment):
@@ -15,6 +16,7 @@ def parse_log(csv_path):
     video_time = 0.0
     video_entries = []
     seen_urls = set()
+    time_by_date = defaultdict(lambda: {"live": 0.0, "video": 0.0})
 
     with open(csv_path, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
@@ -27,7 +29,15 @@ def parse_log(csv_path):
                 continue
             seen_urls.add(url)
 
+            log_date_str = "Invalid date."
             try:
+                log_datetime = datetime.strptime(row["Log Date"], "%Y-%m-%d %H:%M:%S")
+                log_date_str = log_datetime.date().isoformat()
+            except ValueError:
+                print(f"[WARN] Invalid date format: {row['Log Date']}")
+
+            try:
+                print(f"[INFO] Fetching metadata for {url}")
                 yt = YouTube(url)
                 title = yt.title
                 channel = yt.author
@@ -47,8 +57,10 @@ def parse_log(csv_path):
             channel_time[channel] += minutes
             if is_live:
                 livestream_time += minutes
+                time_by_date[log_date_str]["live"] += minutes
             else:
                 video_time += minutes
+                time_by_date[log_date_str]["video"] += minutes
 
             video_entries.append(
                 {
@@ -63,10 +75,12 @@ def parse_log(csv_path):
     channel_time_minutes = sorted(
         channel_time.items(), key=lambda x: x[1], reverse=True
     )
+    time_by_date_sorted = sorted(time_by_date.items(), key=lambda x: x[0])
 
     return {
         "channel_time_minutes": channel_time_minutes,
         "livestream_time_minutes": livestream_time,
         "video_time_minutes": video_time,
         "video_entries": video_entries,
+        "time_by_date": time_by_date_sorted,
     }

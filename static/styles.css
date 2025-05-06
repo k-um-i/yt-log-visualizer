@@ -81,3 +81,7 @@ a:hover {
   gap: 2rem;
   margin-top: 2rem;
 }
+
+.date-box {
+  width: 70%;
+}

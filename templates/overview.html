@@ -18,32 +18,36 @@
         <h2>Livestream vs Video</h2>
         <canvas id="typeChart"></canvas>
       </div>
+      <div class="date-box">
+        <h2>Time Spent Over Time</h2>
+        <canvas id="timeChart"></canvas>
+      </div>
     </div>
 
     <section>
-        <h2>All Logged Videos</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Channel</th>
-                    <th>Duration</th>
-                    <th>Type</th>
-                    <th>Link</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for video in video_entries %}
-                <tr>
-                    <td>{{ video.title }}</td>
-                    <td>{{ video.channel }}</td>
-                    <td>{{ video.duration }}</td>
-                    <td>{{ "Livestream" if video.is_live else "Video" }}</td>
-                    <td><a href="{{ video.url }}" target="_blank">Watch</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+      <h2>All Logged Videos</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Channel</th>
+            <th>Duration</th>
+            <th>Type</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+      <tbody>
+        {% for video in video_entries %}
+          <tr>
+            <td>{{ video.title }}</td>
+            <td>{{ video.channel }}</td>
+            <td>{{ video.duration }}</td>
+            <td>{{ "Livestream" if video.is_live else "Video" }}</td>
+            <td><a href="{{ video.url }}" target="_blank">Watch</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      </table>
     </section>
 
     <script>
@@ -52,68 +56,96 @@
         // Channel Time Bar Chart
         const channelCtx = document.getElementById('channelChart').getContext('2d');
         new Chart(channelCtx, {
-            type: 'bar',
-            data: {
-                labels: {{ channel_time_minutes | map(attribute=0) | list | tojson }},
-                datasets: [{
-                    label: 'Minutes Watched',
-                    data: {{ channel_time_minutes | map(attribute=1) | list | tojson }},
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)'
-                }]
+          type: 'bar',
+          data: {
+            labels: {{ channel_time_minutes | map(attribute=0) | list | tojson }},
+            datasets: [{
+              label: 'Minutes Watched',
+              data: {{ channel_time_minutes | map(attribute=1) | list | tojson }},
+              backgroundColor: 'rgba(54, 162, 235, 0.6)'
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            elements: {
+              bar: {
+                borderWidth: 2,
+                barThickness: 20,
+              }
             },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                elements: {
-                  bar: {
-                    borderWidth: 2,
-                    barThickness: 20,
-                  }
-                },
-                plugins: {
-                    legend: { display: false },
-                    title: { display: true, text: 'Listening Time per Channel' }
-                },
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Minutes Watched'
-                        }
-                    },
-                    y: {
-                      ticks: {
-                        autoSkip: false
-                      }
-                    }
+            plugins: {
+              legend: { display: false },
+              title: { display: true, text: 'Listening Time per Channel' }
+            },
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: 'Minutes Watched'
                 }
+              },
+              y: {
+                ticks: {
+                  autoSkip: false
+                }
+              }
             }
+          }
         });
 
         // Livestream vs Video Pie Chart
         const typeCtx = document.getElementById('typeChart').getContext('2d');
         new Chart(typeCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Livestream', 'Video'],
-                datasets: [{
-                    label: 'Minutes Watched',
-                    data: [
-                      {{ (livestream_time_minutes) }},
-                      {{ (video_time_minutes) }}
-                    ],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.6)',
-                        'rgba(75, 192, 192, 0.6)'
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    title: { display: true, text: 'Livestream vs Video Time' }
-                }
+          type: 'doughnut',
+          data: {
+            labels: ['Livestream', 'Video'],
+            datasets: [{
+              label: 'Minutes Watched',
+              data: [
+                {{ (livestream_time_minutes) }},
+                {{ (video_time_minutes) }}
+              ],
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.6)',
+                'rgba(75, 192, 192, 0.6)'
+              ]
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              title: { display: true, text: 'Livestream vs Video Time' }
             }
+          }
+        });
+
+        // Time Spent Over Time Chart
+        const timeCtx = document.getElementById('timeChart').getContext('2d');
+        const timeChart = new Chart(timeCtx, {
+          type: 'bar',
+          data: {
+            labels: {{ time_by_date | map(attribute=0) | list | tojson}},
+            datasets: [
+              {
+                label: 'Livestream Watch Minutes',
+                data: {{ time_by_date | map(attribute=1) | map(attribute='live') | list | tojson }},
+                backgroundColor: 'rgba(255, 99, 132, 0.6)'
+              },
+              {
+                label: 'Video Watch Minutes',
+                data: {{ time_by_date | map(attribute=1) | map(attribute='video') | list | tojson }},
+                backgroundColor: 'rgba(54, 162, 235, 0.6)'
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              x: { stacked: true },
+              y: { stacked: true, title: { display: true, text: 'Minutes Watched' }}
+            }
+          }
         });
     </script>
 </body>
