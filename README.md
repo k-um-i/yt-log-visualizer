@@ -21,9 +21,10 @@ python main.py <.csv filepath>
 - The visuals and overall execution is still horrendous, I'll probably update it at somepoint.
 
 ### CSV File format
-Required Columns: [Media Type, Comment, Log Date] \
+Required Columns: [Media Type, Comment, Amount Logged, Log Date] \
 Media Type value must be "Listening Time". \
 Comment value must be a Youtube link. \
+Amount Logged value must be an int representing minutes. \
 Log Date format: 2025-05-05 19:39:57
 
 ### Planned Features
