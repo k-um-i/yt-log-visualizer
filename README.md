@@ -27,12 +27,6 @@ Comment value must be a Youtube link. \
 Amount Logged value must be an int representing minutes. \
 Log Date format: 2025-05-05 19:39:57
 
-### Planned Features
-- View data between specified dates only.
-- More visualizations of data.
-- Cleaner UI.
-- Filters/Searching (e.g. showing only data for specified channel)
-
 ## Examples
 ![image](https://github.com/user-attachments/assets/53bc27b0-a556-442d-ab87-c346562153f1)
 ![image](https://github.com/user-attachments/assets/2c41da5d-624b-485e-9adf-cc2eb24c48e9)
