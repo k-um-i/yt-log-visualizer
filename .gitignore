@@ -1,9 +1,6 @@
 # CSVs
 *.csv
 
-# Generated files
-overview.html
-
 # Environments
 .env
 .venv
