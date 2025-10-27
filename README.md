@@ -1,5 +1,5 @@
 # yt-log-visualizer
-Python script for generating an overview.html file that provides an overview of Youtube data logged in a .csv file.
+Python app built with [streamlit](https://github.com/streamlit/streamlit) that provides an overview of Youtube data logged in a .csv file.
 
 ## Usage Instructions
 1. Clone the repo
@@ -10,25 +10,23 @@ git clone https://github.com/k-um-i/yt-log-visualizer.git
 ```
 pip install -r requirements.txt
 ```
-3. Run the script with your .csv file path as the argument
+3. Start the streamlit application
 ```
-python main.py <.csv filepath>
+streamlit run app.py
 ```
+4. Open the app at ``` localhost:8501 ``` by default and follow the instructions.
 
 ### Things to note
-- The script may take a while to run depending on how many Youtube videos you have logged, since it requests each videos metadata.
-- Only log entries that are 'Listening Time' and have a Youtube link inside the 'Comment' column will be parsed.
-- The visuals and overall execution is still horrendous, I'll probably update it at somepoint.
+- The first run when loading your .csv file may take a while to run depending on how many Youtube videos you have logged, since it requests each videos metadata. On subsequent runs this process should be faster thanks to the metadata caching implementation.
+- Only log entries that have a Youtube link inside the 'Comment' column will be parsed.
 
 ### CSV File format
-Required Columns: [Media Type, Comment, Amount Logged, Log Date] \
-Media Type value must be "Listening Time". \
+Required Columns: [Comment, Amount Logged, Log Date] \
 Comment value must be a Youtube link. \
 Amount Logged value must be an int representing minutes. \
 Log Date format: 2025-05-05 19:39:57
 
 ## Examples
-![image](https://github.com/user-attachments/assets/53bc27b0-a556-442d-ab87-c346562153f1)
-![image](https://github.com/user-attachments/assets/2c41da5d-624b-485e-9adf-cc2eb24c48e9)
-![image](https://github.com/user-attachments/assets/38c00024-3616-46ec-9e0d-3e9bf3e2b8e6)
-![image](https://github.com/user-attachments/assets/9ef93571-6a49-4d19-8818-b54bb7e33c98)
+<img width="2506" height="973" alt="image" src="https://github.com/user-attachments/assets/326b3133-7b46-4aca-9c80-d2451f9075d4" />
+<img width="2209" height="560" alt="image" src="https://github.com/user-attachments/assets/d9d9eea6-8fcb-4181-b4e0-92a6c391735b" />
+<img width="2484" height="753" alt="image" src="https://github.com/user-attachments/assets/43f6e5c2-1b7c-44cf-9774-a01bf6e3dd2b" />
