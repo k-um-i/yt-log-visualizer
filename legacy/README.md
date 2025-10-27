@@ -1,3 +1,5 @@
+# LEGACY FUNCTIONALITY IS NOT MAINTAINED, KEPT FOR ARCHIVAL PURPOSES
+If you still for some reason wish to run the legacy scripts, make sure you install the dependencies in both requirements.txt files (Inside this legacy folder and in the root folder of the project).
 # yt-log-visualizer
 Python script for generating an overview.html file that provides an overview of Youtube data logged in a .csv file.
 
@@ -12,7 +14,7 @@ pip install -r requirements.txt
 ```
 3. Run the script with your .csv file path as the argument
 ```
-python main.py <.csv filepath>
+python legacy.py <.csv filepath>
 ```
 
 ### Things to note
