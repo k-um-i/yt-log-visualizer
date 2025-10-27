@@ -1,5 +1,4 @@
 pytubefix
-jinja2
 streamlit
 pandas
 plotly
